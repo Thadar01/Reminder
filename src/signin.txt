@@ -1,0 +1,126 @@
+import { View, Text, ImageBackground } from "react-native";
+import React from "react";
+import Facebook from "../../assets/icons/Facebook";
+import Google from "../../assets/icons/Google";
+import Apple from "../../assets/icons/Apple";
+import Gmail from "../../assets/icons/Gmail";
+import {
+  GestureHandlerRootView,
+  PanGestureHandler,
+  State,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet";
+import { Button } from "react-native";
+import Login from "./Login";
+const SignIn = () => {
+  const loginSheetRef = React.useRef(null);
+
+  const openLoginSheet = () => {
+    loginSheetRef.current?.present();
+  };
+  const closeLoginSheet = () => {
+    loginSheetRef.current?.dismiss();
+  };
+  const renderLoginSheet = () => {
+    return (
+      <View className="bg-[rgba(18, 0, 34, 1)] flex-1">
+        <Login close={closeLoginSheet} />
+      </View>
+    );
+  };
+  return (
+    <GestureHandlerRootView className="flex-1">
+      <BottomSheetModalProvider>
+        <ImageBackground
+          source={require("../images/bg1.png")}
+          className="flex-1"
+        >
+          <View>
+            <View className=" mt-20  mx-4 h-[502px]">
+              <View>
+                <Text className="text-center text-3xl text-white">
+                  Please Sign Up Here
+                </Text>
+              </View>
+              <View className="m-2 mt-7">
+                <View className="w-[100%] h-[70px]  mb-4 rounded-[100%] border-[1px] border-purple-700 flex-row">
+                  <View className="m-4">
+                    <Google />
+                  </View>
+                  <View className="w-[50%] flex justify-center">
+                    <Text className=" text-white text-center text-xl">
+                      Sign up with Google
+                    </Text>
+                  </View>
+                </View>
+                <View className="w-[100%] h-[70px] border-[1px] border-purple-700 mb-4 rounded-[100%] flex-row">
+                  <View className="m-4">
+                    <Facebook />
+                  </View>
+
+                  <View className="w-[55%] flex justify-center">
+                    <Text className=" text-white text-center text-xl">
+                      Sign up with Facebook
+                    </Text>
+                  </View>
+                </View>
+                <View className="w-[100%] h-[70px] border-[1px] border-purple-700  mb-4 rounded-[100%] flex-row">
+                  <View className="m-4">
+                    <Apple />
+                  </View>
+                  <View className="w-[50%] flex justify-center">
+                    <Text className=" text-white text-center text-xl">
+                      Sign up with Apple
+                    </Text>
+                  </View>
+                </View>
+                <View className="w-[100%] h-[70px] border-[1px] border-purple-700  mb-4 rounded-[100%] flex-row">
+                  <View className="m-4">
+                    <Gmail />
+                  </View>
+                  <View className="w-[50%] flex justify-center">
+                    <Text
+                      className=" text-white text-center text-xl"
+                      onPress={openLoginSheet}
+                    >
+                      Sign up with Email
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View className="flex-row justify-center">
+                <Text className="mr-3  text-white text-[16px]">
+                  You have already have an account?
+                </Text>
+                <Text className=" text-[#C2B2F2] font-bold text-[16px]">
+                  Login
+                </Text>
+              </View>
+            </View>
+
+            <View className="flex-1 bg-pink-400">
+              <BottomSheetModal
+                ref={loginSheetRef}
+                snapPoints={["95%", "95%"]}
+                index={0}
+                backgroundComponent={({ style }) => (
+                  <View
+                    style={[style, { backgroundColor: "rgba(18, 0, 34, 1)" }]}
+                  />
+                )}
+              >
+                {renderLoginSheet()}
+              </BottomSheetModal>
+            </View>
+          </View>
+        </ImageBackground>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
+  );
+};
+
+export default SignIn;
